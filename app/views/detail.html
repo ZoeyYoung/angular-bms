@@ -1,0 +1,56 @@
+<div class="row bmc-detail">
+    <article class="bmc-article content col-lg-8 col-md-12" ng-mouseup="showEditorTools()" ng-mouseenter="highlightArticle()">
+        <button type="button" ng-click="cancel()" class="btn btn-info bmc-back-btn" data-toggle="button"><i class="fa fa-chevron-left" data-toggle="tooltip" title="收起正文"></i>
+        </button>
+        <div class="btn-group bmc-toolbar" role="toolbar" ng-style="editorTools">
+            <button type="button" class="btn btn-info" title="标记"><i class="fa fa-tag fa-fw" ng-click="addTagBySel()"></i>
+            </button>
+            <button type="button" class="btn btn-info" title="Note"><i class="fa fa-pencil fa-fw" ng-click="addNoteBySel()"></i>
+            </button>
+            <button type="button" class="btn btn-info" title="Highlight"><i class="fa fa-pencil-square fa-fw" data-toggle="tooltip" ng-click="addHighlightBySel()"></i>
+            </button>
+        </div>
+        <h3 class="bmc-title">{{bmDetail.title}}</h3>
+        <div class="bmc-content">
+            <p><a id="segmentationURL" target="_blank" ng-href="{{bmDetail.url}}">查看原页面</a> | <a id="segmentationTool" href>查看分词结果</a>
+            </p>
+            <p ng-bind-html="bmDetail.content"></p>
+        </div>
+    </article>
+    <!-- 添加链接表单 Begin -->
+    <form name="bookmarkEditForm" class="form-horizontal col-lg-4 visible-lg bmc-form" role="form">
+        <div ng-hide="showState.editForm">
+            <input type="hidden" id="url" name="url" ng-model="bmDetail.url">
+            <div class="form-group">
+                <label for="title" class="control-label sr-only">标题</label>
+                <input type="text" id="title" class="form-control" name="title" placeholder="书签标题" required disabled ng-model="bmDetail.title">
+            </div>
+            <div class="form-group">
+                <label for="description" class="control-label sr-only">摘要</label>
+                <textarea id="description" class="form-control" name="description" rows="3" placeholder="书签摘要" disabled ng-model="bmDetail.description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tags" class="control-label sr-only">标签</label>
+            <tags-input ng-model="bmDetail.tags" name="tags" replace-spaces-with-dashes="false">
+                <auto-complete source="loadTags($query)"></auto-complete>
+            </tags-input>
+            <ul class="stags list-inline">
+                <li class="stag" ng-repeat="stag in bmDetail.stags" ng-click="bmDetail.tags.push(stag)">{{stag}}</li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <label for="note" class="control-label sr-only">笔记</label>
+            <textarea id="note" class="form-control" rows="10" placeholder="还神马都没有记." ng-model="bmDetail.note"></textarea>
+            <span class="help-block">使用Markdown语法</span>
+        </div>
+        <div class="form-group">
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary" ng-click="submit()">提交</button>
+                <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+            </div>
+            <button type="button" class="btn btn-danger" ng-click="deleteByOidFn(bmDetail.oid)" ng-show="bmDetail.oid != undefined">删除</button>
+        </div>
+    </form>
+    <!-- 添加链接表单 End -->
+</div>

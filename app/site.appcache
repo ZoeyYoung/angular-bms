@@ -1,0 +1,12 @@
+CACHE MANIFEST
+
+# 2014-01-17 0.1
+
+favicon.ico
+//netdna.bootstrapcdn.com/bootswatch/3.0.3/yeti/bootstrap.min.css
+//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css
+//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.woff?v=4.0.3
+//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js
+
+NETWORK:
+    *

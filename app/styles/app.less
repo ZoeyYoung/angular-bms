@@ -1,0 +1,296 @@
+/* ===[ Base ]=== */
+@import "css3.less";
+body {
+    font: 14px/1.5"Microsoft YaHei", "微软雅黑", Lucida, Verdana, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif, Serif;
+    overflow-x: hidden;
+    padding-top: 45px;
+    background: #eaeaea;
+}
+.container {
+    width: 100%;
+}
+::selection {
+    color: #fff;
+    background: #fe57a1;
+    .text-shadow(none);
+}
+.modal-dialog {
+    width: 70%;
+    margin: 0 auto;
+}
+nav {
+    #vcard {
+        padding: 5px;
+        .avatar {
+            opacity: .6;
+            border: 1px solid;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    .url-form {
+        margin: 0 -15px;
+        padding: 0;
+    }
+}
+#topTagsList {
+    font-size: 12px;
+    list-style: 1.54;
+}
+.form-signin {
+    max-width: 330px;
+    margin: 0 auto;
+    padding: 15px;
+    .form-signin-heading, .checkbox {
+        margin-bottom: 10px;
+    }
+    .checkbox {
+        font-weight: normal;
+    }
+    .form-control {
+        position: relative;
+        height: auto;
+        padding: 10px;
+        .box-sizing(border-box);
+    }
+    .form-control:focus {
+        z-index: 2;
+    }
+    input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+.form-horizontal .control-label {
+    padding: 0
+}
+.list-group {
+    margin: 0;
+    padding: 0;
+    .text-muted {
+        line-height: 1.54;
+        word-wrap: break-word;
+        color: #444;
+    }
+}
+.bookmark-item {
+    &:hover, &:focus {
+        text-decoration: none;
+        background-color: #f5f5f5
+    }
+    .btn-group {
+        margin-right: -30px;
+        button {
+            padding: 5px;
+        }
+        .dropdown-menu {
+            padding: 0;
+            min-width: 10px;
+        }
+        .dropdown-menu>li>a {
+            padding: 3px 6px
+        }
+    }
+    .bookmark-meta {
+        width: 100%;
+        line-height: 35px;
+        .bookmark-title {
+            margin: 0;
+            height: 35px;
+            overflow: hidden;
+        }
+        a {
+            font-weight: 700;
+            text-rendering: optimizeLegibility;
+        }
+    }
+    .bookmark-note {
+        word-wrap: break-word;
+        overflow: hidden;
+        padding: 10px 0 0 0;
+    }
+    /* bookmark style  */
+    .bookmark-favicon {
+        z-index: 2;
+        width: 20px;
+        height: 20px;
+        .border-radius(50%);
+        .box-shadow(-1px 0 1px rgba(0, 0, 0, .15) inset);
+        .transition(.4s all ease-in-out);
+        a {
+            padding: 1px;
+            width: 20px;
+            height: 20px;
+            .border-radius(50%);
+            .transition(color 0.15s linear);
+            .transition(.4s all ease-in-out);
+        }
+        img {
+            width: 20px;
+            height: 20px;
+            .border-radius(50%);
+            .box-shadow(0 1px 2px rgba(0, 0, 0, 0.22));
+            .transition(.4s all ease-in-out);
+        }
+    }
+    &:hover .bookmark-favicon img {
+        .transform(rotate(360deg));
+    }
+    .tags {
+        margin: 0;
+        padding: 0;
+        li {
+            line-height: 20px;
+            margin: 0 2px 0 0;
+        }
+        a {
+            color: #FF7665
+        }
+    }
+}
+.bmc-detail {
+    margin-top: -45px;
+    background-color: #fafafa;
+    aside {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        .border-radius(5px);
+        .box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.05));
+    }
+    mark {
+        font-weight: bold;
+        width: 100%;
+        background: #ff8;
+    }
+    pre {
+        ins {
+            background: #9f9;
+        }
+        del {
+            background: #f87;
+        }
+        ins, del {
+            line-height: 2.154;
+            text-decoration: none;
+            font-style: normal;
+            display: inline-block;
+            width: 100%;
+        }
+    }
+    .bmc-article {
+        word-wrap: break-word;
+        padding: 0 0 0 38px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        min-height: 600px;
+        max-height: 600px;
+        .bmc-toolbar {
+            position: fixed;
+            display: none;
+            button {
+                padding: 5px;
+            }
+        }
+        .bmc-back-btn {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border: 0;
+            padding: 14px;
+            z-index: 9999;
+        }
+        .bmc-title {
+            line-height: 49px;
+            margin: 0;
+            padding: 0 15px;
+            background: #fafafa;
+            border-left: 1px solid #e5ebe4;
+        }
+        .bmc-content {
+            h1, h2, h3 {
+                font-size : 24px;
+            }
+            h4, h5, h6 {
+                font-size : 20px;
+            }
+            font-size: 18px;
+            border-left: 1px solid #e5ebe4;
+            padding: 15px;
+            background: white;
+        }
+    }
+    .bmc-form {
+        padding: 20px 40px 0 25px;
+        .stags {
+            .stag {
+                cursor: pointer;
+            }
+            li {
+                float: left;
+                border: 1px solid #e7e7e7;
+                background: #f8f8f8;
+            }
+            a {
+                color: #FF7665;
+            }
+        }
+    }
+}
+.video_player {
+    width: 510px;
+    height: 498px;
+}
+footer {
+    margin-bottom: 20px;
+}
+.bootstrap .tags {
+    .appearance(inherit);
+    line-height: 1.428571429;
+    color: #6f6f6f;
+    border: 1px solid #ccc;
+    .border-radius(0);
+    .box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+    .transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+    span {
+        font: 12px/1.5"Microsoft YaHei", "微软雅黑", Lucida, Verdana, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif, serif;
+    }
+    .focused {
+        border-color: #66afe9;
+        outline: 0;
+        .box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6));
+    }
+    .tag-item {
+        color: #fff;
+        border: 0;
+        border-radius: 0;
+        background: #5bc0de;
+        &.selected {
+            color: #fff;
+            border: 0;
+            border-radius: 0;
+            background: #d9534f;
+        }
+        button {
+            background: transparent;
+            opacity: .8;
+            color: #fff;
+        }
+    }
+}
+.bootstrap .autocomplete {
+    border-radius: 0;
+    li.selected {
+        color: #262626;
+        background-color: #e9e9e9;
+    }
+}

@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-10 list-group" ng-controller="BookmarkCtrl">
+        <div class="list-group-item" ng-if="bmsList.keywords != undefined"><h3>搜索 "{{bmsList.keywords}}" 共搜到 {{bmsList.ftxcount}} 个书签:</h3></div>
+        <div class="list-group-item" ng-if="bmsList.currentTag != undefined"><h3>{{bmsList.currentTag}} ({{bmsList.tagcount}} 个书签):</h3></div>
+        <div class="bookmark-item list-group-item" ng-repeat="bookmark in bmsList.bookmarks" ng-mouseover="bmsList.mouseoverIndex = $index">
+            <div class="bookmark-meta row">
+                <p class="bookmark-title col-md-9 col-xs-8">
+                    <a class="bookmark-favicon" target="_blank" title="{{bookmark.url}}" ng-href="{{bookmark.url}}">
+                        <img ng-src="{{bookmark.favicon}}" alt="{{bookmark.title}}" />
+                    </a>
+                    <a target="_blank" title="{{bookmark.title}}" ng-href="{{bookmark.url}}">{{bookmark.title}}</a>
+                    <time><i class="fa fa-clock-o"></i> {{bookmark.added_time * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}</time>
+                </p>
+                <div class="col-md-3 col-xs-4">
+                    <div class="pull-right animate-show" ng-show="$index == bmsList.mouseoverIndex">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary bookmark-edit-btn" ng-click="detail($index)"><i class="fa fa-file-text-o fa-fw"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary hidden-xs" ng-click="star()">
+                                <i class="fa fa-fw" ng-class="{true: 'fa-star-o', false: 'fa-star'}[bookmark.is_star == 0]"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary hidden-xs" ng-click="refresh($index)"><i class="fa fa-refresh fa-fw" ng-class="{'fa-spin': refresh_index == $index}"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="visible-xs" ng-click="star()"><a href title="加星"><i class="fa fa-fw" ng-class="{true: 'fa-star-o', false: 'fa-star'}[bookmark.is_star == 0]"></i> 加星</a>
+                                </li>
+                                <li class="visible-xs" ng-click="refresh($index)"><a href title="更新"><i class="fa fa-refresh fa-fw" ng-class="{'fa-spin': refresh_index == $index}"></i> 更新</a>
+                                </li>
+                                <li ng-click="delete($index)"><a href title="删除"><i class="fa fa-trash-o fa-fw"></i> 删除</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <div class="text-muted">{{bookmark.excerpt}}</div>
+                    <div class="bookmark-note animate-show" ng-bind-html="bookmark.note_html" ng-show="$index == bmsList.mouseoverIndex"></div>
+                </div>
+            </div>
+            <ul class="list-inline tags">
+                <li><i class="fa fa-tags fa-fw"></i></li>
+                <li ng-repeat="tag in bookmark.tags"><a href="#/tags/{{tag | uppercase}}">{{tag | uppercase}}</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="pagination" ng-show="showState.pager" ng-controller="PagerCtrl">
+            <li class="previous" ng-class="{'disabled': !bmsList.pager.has_prev}"><a href ng-click="prevPage()">上一页</a>
+            </li>
+            <li ng-class="{'disabled': bmsList.pager.cur == 1}">
+                <a href ng-click="firstPage()">
+                    &laquo;</a>
+            </li>
+            <li ng-repeat="n in range" ng-class="{active: n == bmsList.pager.cur}" ng-click="setPage()"><a href ng-bind="n">1<span class="sr-only" ng-if="n == bmsList.pager.cur">(current)</span></a>
+            </li>
+            <li ng-class="{'disabled': bmsList.pager.cur == bmsList.pager.last_page}"><a href ng-click="lastPage()">&raquo;</a>
+            </li>
+            <li class="next" ng-class="{'disabled': !bmsList.pager.has_next}"><a href ng-click="nextPage()">下一页</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="col-md-2 list-unstyled" ng-controller="TopTagsCtrl">
+        <li>
+            <h4><i class="fa fa-tags fa-fw"></i> 常用标签</h4>
+        </li>
+        <li ng-repeat="tag in topTags"><a href="#/tags/{{tag['_id']}}">{{tag['_id']}}({{tag['count']}})</a>
+        </li>
+        <li><a href="#/tags_cloud">所有标签</a></li>
+    </ul>
+</div>

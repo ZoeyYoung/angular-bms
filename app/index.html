@@ -1,0 +1,135 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html xmlns:ng="http://angularjs.org" lang="en" ng-app="bmcApp" manifest="site.appcache">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>书签云</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <!-- Font Awesome 4.0.1 doesn't support IE7, but an older version does.  -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/styles.css -->
+    <link rel="stylesheet" href="styles/pygments.css" media="screen">
+    <link rel="stylesheet" href="styles/animates.css"/>
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="MainCtrl">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-hide="showState.readView" ng-controller="NavbarCtrl">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand n-cloud" href="#/" ng-click="active('list-nav')"><i class="fa fa-cloud fa-fw"></i> 书签云</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{'active': nav == 'list-nav'}"><a href="#/" ng-click="listBookmarks()"><i class="fa fa-list fa-fw"></i> 列表</a>
+                    </li>
+                    <li ng-class="{'active': nav == 'tags-nav'}"><a href="#/tags_cloud"><i class="fa fa-tags fa-fw"></i> 标签</a>
+                    </li>
+                    <li ng-class="{'active': nav == 'random-nav'}"><a href="#/random" ng-click="randomBookmarks()"><i class="fa fa-random fa-fw"></i> 随机</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" name="searchForm" role="search" ng-submit="submit(keywords)">
+                    <div class="form-group">
+                        <input type="text" id="keywords" name="keywords" ng-model="keywords" class="form-control" placeholder="搜索..." ng-focus="searchClass='stretchRight'" ng-blur="searchClass='stretchLeft'" ng-class="searchClass">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="vcard" data-title="{{user['email']}}" data-content="共收藏了{{handler.total}}个书签" class="hidden-xs">
+                        <gravatar-image data-gravatar-email="user.email" data-gravatar-size="33" data-gravatar-rating="pg" data-gravatar-default="404" data-gravatar-secure="true" data-gravatar-css-class="avatar"></gravatar-image>
+                        <li class="visible-lg" ng-click="toggleUrlForm()"><a class="n-add" href><i class="fa fa-plus-square fa-fw"></i> 添加</a>
+                        </li>
+                        <li><a class="n-logout" href="/auth/logout"><i class="fa fa-power-off fa-fw"></i> 登出</a>
+                        </li>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <form name="urlForm" class="url-form form-group animate-pulldown" ng-show="showState.urlForm">
+                <label for="url" class="control-label sr-only">URL</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-bookmark fa-fw"></i>
+                    </span>
+                    <input type="url" ng-model="bmDetail.url" class="form-control" name="url" placeholder="http://www.website.com" autofocus required/>
+                    <span class="input-group-btn">
+                        <button ng-disabled='!urlForm.$valid' class="btn btn-info" type="button" ng-click="getBookmarkInfo()" data-loading-text="载入中...">获取信息</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div class="container" role="main" ng-view>
+    </div>
+    <footer id="footer" class="hidden" role="footer">
+        <p>Copyright © 2013 <a href="http://zoeyyoung.github.io/">ZoeyYoung</a>
+        </p>
+    </footer>
+    <!--[if lt IE 9]>
+    <script src="libs/es5-shim/es5-shim.js"></script>
+    <script src="libs/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-scenario/angular-scenario.js"></script>
+    <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/vendor/md5-service.js"></script>
+    <script src="scripts/vendor/gravatar-directive.js"></script>
+    <script src="scripts/vendor/jquery.highlight.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/auth.js"></script>
+    <script src="scripts/controllers/navbar.js"></script>
+    <script src="scripts/controllers/list.js"></script>
+    <script src="scripts/controllers/bookmark.js"></script>
+    <script src="scripts/controllers/pager.js"></script>
+    <script src="scripts/controllers/tags.js"></script>
+    <script src="scripts/controllers/detail.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

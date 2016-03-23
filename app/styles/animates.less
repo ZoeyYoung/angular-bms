@@ -1,0 +1,151 @@
+@import "css3.less";
+.pullDown {
+    .animation-name(pullDown);
+    .animation-duration(1.1s);
+    .animation-timing-function(ease-out);
+    .transform-origin(50% 0%);
+}
+@keyframes pullDown {
+    0% {
+        transform: scaleY(0.1);
+    }
+    40% {
+        transform: scaleY(1.02);
+    }
+    60% {
+        transform: scaleY(0.98);
+    }
+    80% {
+        transform: scaleY(1.01);
+    }
+    100% {
+        transform: scaleY(0.98);
+    }
+    80% {
+        transform: scaleY(1.01);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+@-webkit-keyframes pullDown {
+    0% {
+        -webkit-transform: scaleY(0.1);
+    }
+    40% {
+        -webkit-transform: scaleY(1.02);
+    }
+    60% {
+        -webkit-transform: scaleY(0.98);
+    }
+    80% {
+        -webkit-transform: scaleY(1.01);
+    }
+    100% {
+        -webkit-transform: scaleY(0.98);
+    }
+    80% {
+        -webkit-transform: scaleY(1.01);
+    }
+    100% {
+        -webkit-transform: scaleY(1);
+    }
+}
+.stretchLeft {
+    .animation-name(stretchLeft);
+    .animation-duration(0.5s);
+    .animation-timing-function(ease-out);
+    .transform-origin(0% 0%);
+}
+@keyframes stretchLeft {
+    from {
+        width: 300px;
+    }
+    to {
+        width: 127px;
+    }
+}
+@-webkit-keyframes stretchLeft {
+    from {
+        width: 300px;
+    }
+    to {
+        width: 127px;
+    }
+}
+.stretchRight {
+    width: 300px;
+    .animation-name(stretchRight);
+    .animation-duration(1.5s);
+    .animation-timing-function(ease-out);
+    .transform-origin(0% 0%);
+}
+@keyframes stretchRight {
+    0% {
+        transform: scaleX(0.3);
+    }
+    40% {
+        transform: scaleX(1.02);
+    }
+    60% {
+        transform: scaleX(0.98);
+    }
+    80% {
+        transform: scaleX(1.01);
+    }
+    100% {
+        transform: scaleX(0.98);
+    }
+    80% {
+        transform: scaleX(1.01);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+@-webkit-keyframes stretchRight {
+    0% {
+        -webkit-transform: scaleX(0.3);
+    }
+    40% {
+        -webkit-transform: scaleX(1.02);
+    }
+    60% {
+        -webkit-transform: scaleX(0.98);
+    }
+    80% {
+        -webkit-transform: scaleX(1.01);
+    }
+    100% {
+        -webkit-transform: scaleX(0.98);
+    }
+    80% {
+        -webkit-transform: scaleX(1.01);
+    }
+    100% {
+        -webkit-transform: scaleX(1);
+    }
+}
+.animate-pulldown {
+    .pullDown;
+}
+.animate-pulldown.ng-hide-add, .animate-pulldown.ng-hide-remove {
+    display:block!important;
+}
+.animate-pulldown.ng-hide {
+    .transition(all linear 0.5s);
+    line-height:0;
+    opacity:0;
+}
+.animate-show {
+    .transition(all linear 0.5s);
+    opacity:1;
+}
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+    display:block!important;
+}
+.animate-show.ng-hide {
+    .transition(all linear 0.5s);
+    line-height:0;
+    opacity:0;
+}

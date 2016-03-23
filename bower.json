@@ -1,0 +1,39 @@
+{
+  "name": "bmc",
+  "version": "1.0.0",
+  "authors": [
+    "Zoey <ydingmiao@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "1.11.0",
+    "json3": "~3.3.0",
+    "es5-shim": "~2.3.0",
+    "angular": "~1.2.13",
+    "angular-animate": "~1.2.13",
+    "angular-cookies": "~1.2.13",
+    "angular-resource": "~1.2.13",
+    "angular-route": "~1.2.13",
+    "angular-sanitize": "~1.2.13",
+    "angular-scenario": "~1.2.13",
+    "ng-tags-input": "~1.1.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.13",
+    "angular-scenario": "~1.2.13"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "A Bookmarks Manager System",
+  "keywords": [
+    "bookmarks",
+    "angularjs",
+    "bootstrap3"
+  ]
+}

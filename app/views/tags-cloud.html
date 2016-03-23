@@ -1,0 +1,3 @@
+<div class="well" ng-controller="TagsCloudCtrl">
+    <a style="font-size: {{tag.font_size}}pt" ng-href="#/tags/{{tag.tag}}" ng-repeat="tag in tagsCloud">{{tag.tag}}({{tag.count}})</a>
+</div>

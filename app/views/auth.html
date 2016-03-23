@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4 well">
+        <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-justified">
+              <li ng-class="{'active': showState.showSignIn}"><a ng-click="showState.showSignIn = true">登录</a></li>
+              <li ng-class="{'active': !showState.showSignIn}"><a ng-click="showState.showSignIn = false">注册</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div ng-class="{'tab-pane': !showState.showSignIn, 'tab-pane active': showState.showSignIn}">
+                <form name="signInForm" class="form-signin form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="email" class="sr-only control-label">邮箱</label>
+                        <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="邮箱" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="sr-only control-label">密码</label>
+                        <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="密码" required>
+                    </div>
+                    <div class="form-actions">
+                        <div class="pull-right">
+                            <button ng-disabled='!signInForm.$valid' ng-click="signIn()" class="btn btn-primary">登录</button>
+                        </div>
+                    </div>
+                </form>
+              </div>
+              <div ng-class="{'tab-pane': showState.showSignIn, 'tab-pane active': !showState.showSignIn}">
+                <form name="signUpForm" class="form-signin form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="email" class="sr-only control-label">邮箱</label>
+                        <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="邮箱" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="sr-only control-label">用户名</label>
+                        <input type="username" class="form-control" name="username" ng-model="user.name" placeholder="用户名" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="sr-only control-label">密码</label>
+                        <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="密码" required>
+                    </div>
+                    <div class="form-actions">
+                        <div class="pull-right">
+                            <button ng-disabled='!signUpForm.$valid' ng-click="signUp()" class="btn btn-default">注册</button>
+                        </div>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
